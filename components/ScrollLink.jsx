@@ -1,20 +1,15 @@
 "use client";
 
-export default function ScrollLink({ href, children }) {
-  const handleClick = (e) => {
-    e.preventDefault();
+import Link from "next/link";
 
-    const id = href.replace("/#", "");
-    const el = document.getElementById(id);
-
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
+export default function ScrollLink({ href, children, onClick = () => {} }) {
   return (
-    <a href={href} onClick={handleClick}>
+    <Link
+      href={href}
+      onClick={onClick}
+      className="cursor-pointer hover:text-white transition"
+    >
       {children}
-    </a>
+    </Link>
   );
 }
