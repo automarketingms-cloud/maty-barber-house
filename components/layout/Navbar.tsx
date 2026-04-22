@@ -20,9 +20,26 @@ export default function Navbar() {
           priority
         />
 
-        {/* Botón hamburguesa (solo móvil) */}
-        <button onClick={() => setOpen(!open)} className="md:hidden text-3xl">
-          ☰
+        {/* Botón hamburguesa animado */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden flex flex-col gap-1"
+        >
+          <span
+            className={`block h-0.5 w-7 bg-(--gold) transition-all duration-300 ${
+              open ? "rotate-45 translate-y-2" : ""
+            }`}
+          />
+          <span
+            className={`block h-0.5 w-7 bg-(--gold) transition-all duration-300 ${
+              open ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`block h-0.5 w-7 bg-(--gold) transition-all duration-300 ${
+              open ? "-rotate-45 -translate-y-2" : ""
+            }`}
+          />
         </button>
 
         {/* Links desktop */}
@@ -35,9 +52,13 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Menú móvil desplegable */}
-      {open && (
-        <div className="flex flex-col gap-6 mt-6 md:hidden text-center text-lg">
+      {/* Menú móvil con animación */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-500 ${
+          open ? "max-h-96 opacity-100 mt-6" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="flex flex-col gap-6 text-center text-lg bg-black/95 py-6 rounded-lg border border-(--gold)">
           <ScrollLink href="/#home" onClick={() => setOpen(false)}>
             Inicio
           </ScrollLink>
@@ -54,7 +75,7 @@ export default function Navbar() {
             Contacto
           </ScrollLink>
         </div>
-      )}
+      </div>
     </nav>
   );
 }
